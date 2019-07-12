@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  videoapi:
+    image: videoapi
+    build:
+      context: ./VideoApi
+      dockerfile: Dockerfile

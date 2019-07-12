@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi", "VideoApi\VideoApi.csproj", "{A54807C0-5D8B-4CFC-AF4E-696FB7927794}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F1E5B44-C244-4E72-A664-D106FA5E21A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDD48B77-C48A-4296-9929-33AF9264836D}
+	EndGlobalSection
+EndGlobal
