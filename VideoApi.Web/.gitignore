@@ -1,6 +1,0 @@
-bin/
-obj/
-wwwroot/
-Properties/launchSetings.json
-
-**/*.csproj.user
