@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi", "VideoApi\VideoApi.csproj", "{A54807C0-5D8B-4CFC-AF4E-696FB7927794}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F1E5B44-C244-4E72-A664-D106FA5E21A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Data", "VideoApi.Data\VideoApi.Data.csproj", "{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi.Web", "VideoApi.Web\VideoApi.Web.csproj", "{DFD09157-7440-4B37-83CC-92AFF7D6819E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A54807C0-5D8B-4CFC-AF4E-696FB7927794}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F1E5B44-C244-4E72-A664-D106FA5E21A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD09157-7440-4B37-83CC-92AFF7D6819E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD09157-7440-4B37-83CC-92AFF7D6819E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD09157-7440-4B37-83CC-92AFF7D6819E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD09157-7440-4B37-83CC-92AFF7D6819E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
