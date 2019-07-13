@@ -1,8 +1,8 @@
-version: '3'
+version: '3.4'
 
 services:
-  videoapi:
-    image: videoapi
+  videoapi.web:
+    image: videoapi.web
     build:
-      context: ./VideoApi
+      context: ./VideoApi.Web
       dockerfile: Dockerfile
