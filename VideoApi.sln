@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F1E5B44-C244-4E72-A664-D106FA5E21A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Data", "VideoApi.Data\VideoApi.Data.csproj", "{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Data.MongoDb", "VideoApi.Data.MongoDb\VideoApi.Data.MongoDb.csproj", "{CD3FAAB4-C539-4942-B5F9-0DFC087381F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi.Web", "VideoApi.Web\VideoApi.Web.csproj", "{DFD09157-7440-4B37-83CC-92AFF7D6819E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Web", "VideoApi.Web\VideoApi.Web.csproj", "{DFD09157-7440-4B37-83CC-92AFF7D6819E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
