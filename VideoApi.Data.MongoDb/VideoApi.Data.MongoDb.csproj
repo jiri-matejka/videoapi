@@ -6,17 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="database-settings.Development.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="database-settings.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VideoApi.Data\VideoApi.Data.csproj" />
   </ItemGroup>
 
 </Project>
