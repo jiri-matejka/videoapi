@@ -18,6 +18,7 @@ namespace VideoApi.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
         }
 
         public IConfiguration Configuration { get; }
