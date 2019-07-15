@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using VideoApi.Data.Entities;
 
-namespace VideoApi.Data
+namespace VideoApi.Data.MongoDb.Serializers
 {
     internal class AccountSerializer
     {
