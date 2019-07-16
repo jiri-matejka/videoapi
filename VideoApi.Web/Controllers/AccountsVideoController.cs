@@ -19,23 +19,11 @@ namespace VideoApi.Controllers
 		}
 
 		[HttpGet("{accountId}/resumepoints")]
-        public Task<object> GetAllResumePoints(int accountId)
+        public async Task<object> GetAllResumePoints(string accountId)
         {
-			ResumePoint rp = new ResumePoint { VideoId = "1", TimePoint = 13.5 };
-				
+			IReadOnlyList<ResumePoint> resumePoints = await this.resumePointRepository.GetAll(accountId);
 
-            var firstElem = new
-            {
-                account = 123,
-                resumePoint = rp.TimePoint
-            };
-
-            var result = new[]
-            {
-                firstElem
-            };
-
-            return Task.FromResult((object)result);
+			return resumePoints;
         }
 
     }

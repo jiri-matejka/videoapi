@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using VideoApi.Data.MongoDb.Mapping;
 
 namespace VideoApi.Data.MongoDb
 {
@@ -10,9 +12,13 @@ namespace VideoApi.Data.MongoDb
     {
 		public static MongoClient CreateClient(IConfiguration configuration)
         {
+			AccountSerializer.MapClasses();
+
 			var databaseSection = configuration.GetSection("Database");
 			string fullConnectionString = databaseSection["ConnectionString"];
-			return new MongoDB.Driver.MongoClient(fullConnectionString);
+			var mongoClient = new MongoClient(fullConnectionString);
+
+			return mongoClient;
         }
     }
 }
