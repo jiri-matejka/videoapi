@@ -8,10 +8,9 @@ using VideoApi.Data.Entities;
 
 namespace VideoApi.Data.MongoDb.Mapping
 {
-	internal partial class AccountSerializer
+	internal class MappingConfigurator
     {
-
-		public static void MapClasses()
+		public static void ConfigureMapping()
         {
 			var pack = new ConventionPack();
 			pack.Add(new FirstLetterLowerCaseConvention());
@@ -23,10 +22,7 @@ namespace VideoApi.Data.MongoDb.Mapping
 			BsonClassMap.RegisterClassMap<Account>(cm =>
             {
                 cm.AutoMap();
-				cm.MapProperty(a => a.Id).SetSerializer(new ObjectIdToStringSerializer());
-				//cm.MapProperty()
-                //cm.MapIdMember(a => a.Id);
-                //cm.IdMemberMap.SetIdGenerator(ObjectIdGenerator.Instance);
+				cm.MapProperty(a => a.Id).SetSerializer(new ObjectIdToStringSerializer());				
             });
 
 			BsonClassMap.RegisterClassMap<ResumePoint>(cm =>

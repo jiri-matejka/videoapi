@@ -12,7 +12,7 @@ namespace VideoApi.Data.MongoDb
     {
 		public static MongoClient CreateClient(IConfiguration configuration)
         {
-			AccountSerializer.MapClasses();
+			MappingConfigurator.ConfigureMapping();
 
 			var databaseSection = configuration.GetSection("Database");
 			string fullConnectionString = databaseSection["ConnectionString"];

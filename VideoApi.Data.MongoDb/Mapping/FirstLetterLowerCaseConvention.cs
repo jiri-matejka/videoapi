@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Conventions;
 
 namespace VideoApi.Data.MongoDb.Mapping
 {
-	public class FirstLetterLowerCaseConvention : IMemberMapConvention
+	internal class FirstLetterLowerCaseConvention : IMemberMapConvention
 	{
 		public string Name => nameof(FirstLetterLowerCaseConvention);
 
