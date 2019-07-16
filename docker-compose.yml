@@ -25,3 +25,5 @@ services:
     build:
       context: ./VideoApi.Web
       dockerfile: Dockerfile
+    links:
+      - mongo
