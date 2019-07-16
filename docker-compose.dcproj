@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>7f1e5b44-c244-4e72-a664-d106fa5e21a5</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
-    <DockerServiceUrl>http://localhost:{ServicePort}/api/values</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:{ServicePort}/api/accounts/5d2ca8e9a9818900062773c4/resumepoints</DockerServiceUrl>
     <DockerServiceName>videoapi.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
