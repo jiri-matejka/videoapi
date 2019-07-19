@@ -24,10 +24,7 @@ namespace VideoApi.Data.MongoDb
 
 			FilterDefinition<Account> filter = 
 				Builders<Account>.Filter.Eq("_id", new ObjectId(accountId)) &
-				// new ObjectId(rp.VideoId) == new ObjectId(videoId)
-				// InvalidOperationException: new ObjectId({document}{videoId}) is not supported
 				Builders<Account>.Filter.ElemMatch(a => a.ResumePoints, rp => rp.VideoId == new BsonObjectId(new ObjectId(videoId)));
-
 
 			var result = await collection.Find(filter).SingleOrDefaultAsync();
 
