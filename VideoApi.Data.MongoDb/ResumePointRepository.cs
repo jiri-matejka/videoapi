@@ -18,9 +18,20 @@ namespace VideoApi.Data.MongoDb
 			this.database = database;
 		}
 
-		public ResumePoint Get(string id)
+		public async Task<ResumePoint> Get(string accountId, string videoId)
 		{
-			return null;
+			IMongoCollection<Account> collection = this.database.GetCollection<Account>("accounts");
+
+			FilterDefinition<Account> filter = 
+				Builders<Account>.Filter.Eq("_id", new ObjectId(accountId)) &
+				// new ObjectId(rp.VideoId) == new ObjectId(videoId)
+				// InvalidOperationException: new ObjectId({document}{videoId}) is not supported
+				Builders<Account>.Filter.ElemMatch(a => a.ResumePoints, rp => rp.VideoId == new BsonObjectId(new ObjectId(videoId)));
+
+
+			var result = await collection.Find(filter).SingleOrDefaultAsync();
+
+			return result.ResumePoints.SingleOrDefault();
 		}
 
 		public async Task<IReadOnlyList<ResumePoint>> GetAll(string accountId)
@@ -30,13 +41,11 @@ namespace VideoApi.Data.MongoDb
 			FilterDefinition<Account> accountFilter = new BsonDocument(
 				new BsonElement("_id", new BsonObjectId(new ObjectId(accountId))));
 
-			IList<Account> accounts = await collection.Find(accountFilter).ToListAsync();
-			if (accounts == null || accounts.Count == 0)
+			Account account = await collection.Find(accountFilter).FirstOrDefaultAsync();
+			if (account == null)
 				throw new ArgumentException($"Account {accountId} does not exist");
-			if (accounts.Count > 1)
-				throw new InvalidOperationException($"There are more accounts with the same id {accountId}");
 
-			return accounts[0].ResumePoints;
+			return account.ResumePoints;
 		}
 	}
 }

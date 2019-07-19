@@ -26,5 +26,13 @@ namespace VideoApi.Controllers
 			return resumePoints;
         }
 
+		[HttpGet("{accountId}/videos/{videoId}/resumepoint")]
+		public async Task<object> GetResumePointForVideo(string accountId, string videoId)
+		{
+			ResumePoint resumePoint = await this.resumePointRepository.Get(accountId, videoId);
+
+			return resumePoint;
+		}
+
     }
 }
