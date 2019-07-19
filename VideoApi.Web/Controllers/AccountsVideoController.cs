@@ -34,5 +34,12 @@ namespace VideoApi.Controllers
 			return resumePoint;
 		}
 
+		[HttpPost("{accountId}/videos/{videoId}/resumepoint")]
+		[HttpPut("{accountId}/videos/{videoId}/resumepoint")]
+		public async Task CreateOrUpdateResumePoint(string accountId, string videoId, [FromBody] double timePoint)
+		{
+			
+		}
+
     }
 }

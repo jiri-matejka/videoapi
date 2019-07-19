@@ -11,5 +11,6 @@ namespace VideoApi.Data
    
 		Task<IReadOnlyList<ResumePoint>> GetAll(string accountId);
 		Task<ResumePoint> Get(string accountId, string videoId);
+		Task InsertOrUpdate(string accountId, string videoId, double timePoint);
 	}
 }

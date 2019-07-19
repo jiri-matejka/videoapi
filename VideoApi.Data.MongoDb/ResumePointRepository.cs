@@ -22,7 +22,7 @@ namespace VideoApi.Data.MongoDb
 
 		public async Task<ResumePoint> Get(string accountId, string videoId)
 		{
-			FilterDefinition<Account> filter = 
+			FilterDefinition<Account> filter =
 				Builders<Account>.Filter.Eq("_id", new ObjectId(accountId)) &
 				Builders<Account>.Filter.ElemMatch(a => a.ResumePoints, rp => rp.VideoId == new BsonObjectId(new ObjectId(videoId)));
 
@@ -41,6 +41,11 @@ namespace VideoApi.Data.MongoDb
 				throw new ArgumentException($"Account {accountId} does not exist");
 
 			return account.ResumePoints;
+		}
+
+		public Task InsertOrUpdate(string accountId, string videoId, double timePoint)
+		{
+			return null;
 		}
 	}
 }
