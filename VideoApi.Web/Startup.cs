@@ -33,8 +33,11 @@ namespace VideoApi.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			services.AddScoped<IResumePointRepository, Data.MongoDb.ResumePointRepository>();
-			services.AddSingleton<MongoDB.Driver.MongoClient>(
-				(provider) => VideoApi.Data.MongoDb.DatabaseFactory.CreateClient(this.Configuration));
+
+			var dbFactory = new Data.MongoDb.DatabaseFactory(this.Configuration);
+
+			services.AddSingleton(
+				(provider) => dbFactory.GetDefaultDatabase(dbFactory.CreateClient()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

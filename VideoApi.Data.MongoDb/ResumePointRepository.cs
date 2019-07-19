@@ -11,11 +11,11 @@ namespace VideoApi.Data.MongoDb
 {
 	public class ResumePointRepository : IResumePointRepository
 	{
-		private readonly MongoClient client;
+		private readonly IMongoDatabase database;
 
-		public ResumePointRepository(MongoClient client)
+		public ResumePointRepository(IMongoDatabase database)
 		{
-			this.client = client;
+			this.database = database;
 		}
 
 		public ResumePoint Get(string id)
@@ -25,9 +25,7 @@ namespace VideoApi.Data.MongoDb
 
 		public async Task<IReadOnlyList<ResumePoint>> GetAll(string accountId)
 		{
-			IMongoDatabase db = this.client.GetDatabase("videoapi");
-			
-			IMongoCollection<Account> collection = db.GetCollection<Account>("accounts");
+			IMongoCollection<Account> collection = this.database.GetCollection<Account>("accounts");
 
 			FilterDefinition<Account> accountFilter = new BsonDocument(
 				new BsonElement("_id", new BsonObjectId(new ObjectId(accountId))));
