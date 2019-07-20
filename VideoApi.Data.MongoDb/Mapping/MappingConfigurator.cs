@@ -29,6 +29,7 @@ namespace VideoApi.Data.MongoDb.Mapping
 			{
 				cm.AutoMap();
 				cm.MapProperty(r => r.VideoId).SetSerializer(new ObjectIdToStringSerializer());
+				cm.MapProperty(r => r.AccountId).SetSerializer(new ObjectIdToStringSerializer());
 			});
 		}
 

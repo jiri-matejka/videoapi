@@ -13,11 +13,13 @@ namespace VideoApi.Data.MongoDb
 	{
 		private readonly IMongoDatabase database;
 		private readonly IMongoCollection<Account> accountCollection;
+		private readonly IMongoCollection<ResumePoint> pointCollection;
 
 		public ResumePointRepository(IMongoDatabase database)
 		{
 			this.database = database;
 			this.accountCollection = this.database.GetCollection<Account>("accounts");
+			this.pointCollection = this.database.GetCollection<ResumePoint>("resumePoints");
 		}
 
 		public async Task<ResumePoint> Get(string accountId, string videoId)
@@ -43,9 +45,20 @@ namespace VideoApi.Data.MongoDb
 			return account.ResumePoints;
 		}
 
-		public Task InsertOrUpdate(string accountId, string videoId, double timePoint)
+		public async Task InsertOrUpdate(string accountId, string videoId, double timePoint)
 		{
-			return null;
+			FilterDefinition<ResumePoint> filter = new BsonDocument()
+			{
+				{ "accountId", accountId },
+				{ "videoId", videoId }
+			};
+
+			UpdateDefinition<ResumePoint> update = 
+				new BsonDocument("$set", new BsonDocument("timePoint", timePoint));
+
+			UpdateResult result = await this.pointCollection.UpdateOneAsync(
+				filter, update, new UpdateOptions { IsUpsert = true });
+			
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using VideoApi.Data;
 using VideoApi.Data.Entities;
 
@@ -12,6 +13,11 @@ namespace VideoApi.Controllers
     public class AccountsVideoController : Controller
     {
 		private readonly IResumePointRepository resumePointRepository;
+
+		public class CreateOrUpdateResumePointRequest
+		{
+			public double timePoint;
+		}
 
 		public AccountsVideoController(IResumePointRepository resumePointRepository)
 		{
@@ -36,9 +42,22 @@ namespace VideoApi.Controllers
 
 		[HttpPost("{accountId}/videos/{videoId}/resumepoint")]
 		[HttpPut("{accountId}/videos/{videoId}/resumepoint")]
-		public async Task CreateOrUpdateResumePoint(string accountId, string videoId, [FromBody] double timePoint)
+		public async Task<IStatusCodeActionResult> CreateOrUpdateResumePoint(string accountId, string videoId, [FromBody] CreateOrUpdateResumePointRequest request)
 		{
-			
+			if (request == null)
+				return BadRequest();
+
+			try
+			{
+				await this.resumePointRepository.InsertOrUpdate(accountId, videoId, request.timePoint);
+			}
+			catch
+			{
+				// Normally I would log the exception to the log here
+				return StatusCode(500);
+			}
+
+			return Ok();
 		}
 
     }
