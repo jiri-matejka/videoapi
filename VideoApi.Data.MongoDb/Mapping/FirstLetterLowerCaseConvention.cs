@@ -13,8 +13,13 @@ namespace VideoApi.Data.MongoDb.Mapping
 		public void Apply(BsonMemberMap memberMap)
 		{
 			string csharpName = memberMap.MemberName;
+			memberMap.SetElementName(MapNameToMongo(csharpName));
+		}
+
+		public string MapNameToMongo(string csharpName)
+		{
 			string mongoName = csharpName.Substring(0, 1).ToLower() + csharpName.Substring(1);
-			memberMap.SetElementName(mongoName);
+			return mongoName;
 		}
 	}
 }

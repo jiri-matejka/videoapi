@@ -8,17 +8,24 @@ using VideoApi.Data.Entities;
 
 namespace VideoApi.Data.MongoDb.Mapping
 {
-	internal class MappingConfigurator
+	public class MappingConfigurator
     {
-		public static void ConfigureMapping()
+		private readonly FirstLetterLowerCaseConvention firstLetterLowerCaseConvention;
+
+		public MappingConfigurator()
+		{
+			this.firstLetterLowerCaseConvention = new FirstLetterLowerCaseConvention();
+		}
+
+		public void ConfigureMapping()
         {
 			var pack = new ConventionPack();
-			pack.Add(new FirstLetterLowerCaseConvention());
+			pack.Add(this.firstLetterLowerCaseConvention);
 			ConventionRegistry.Register(
 				nameof(FirstLetterLowerCaseConvention),
 				pack,
 				t => t.FullName.StartsWith("VideoApi.Data"));
-
+			
 			BsonClassMap.RegisterClassMap<Account>(cm =>
             {
                 cm.AutoMap();
@@ -31,6 +38,12 @@ namespace VideoApi.Data.MongoDb.Mapping
 				cm.MapProperty(r => r.VideoId).SetSerializer(new ObjectIdToStringSerializer());
 				cm.MapProperty(r => r.AccountId).SetSerializer(new ObjectIdToStringSerializer());
 			});
+		}
+
+		public string MapNameToMongo(string csharpName)
+		{
+			// simplistic version
+			return this.firstLetterLowerCaseConvention.MapNameToMongo(csharpName);
 		}
 
     }

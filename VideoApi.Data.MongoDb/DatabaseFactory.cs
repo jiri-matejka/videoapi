@@ -8,18 +8,23 @@ using VideoApi.Data.MongoDb.Mapping;
 
 namespace VideoApi.Data.MongoDb
 {
-    public class DatabaseFactory
+    internal class DatabaseFactory
     {
 		private readonly IConfiguration configuration;
+		private readonly MappingConfigurator mappingConfigurator;
+		private readonly IMongoClient mongoClient;
 
-		public DatabaseFactory(IConfiguration configuration)
+		public DatabaseFactory(IConfiguration configuration, MappingConfigurator mappingConfigurator)
 		{
-			MappingConfigurator.ConfigureMapping();
-
 			this.configuration = configuration;
+			this.mappingConfigurator = mappingConfigurator;
+
+			this.mappingConfigurator.ConfigureMapping();
+
+			this.mongoClient = CreateClient();
 		}
 
-		public MongoClient CreateClient()
+		private MongoClient CreateClient()
         {
 			var databaseSection = this.configuration.GetSection("Database");
 			string fullConnectionString = databaseSection["ConnectionString"];
@@ -28,12 +33,12 @@ namespace VideoApi.Data.MongoDb
 			return mongoClient;
         }
 
-		public IMongoDatabase GetDefaultDatabase(MongoClient client)
+		public IMongoDatabase GetDefaultDatabase()
 		{
 			var databaseSection = configuration.GetSection("Database");
 			string databaseName = databaseSection["DatabaseName"];
 
-			IMongoDatabase db = client.GetDatabase(databaseName);
+			IMongoDatabase db = mongoClient.GetDatabase(databaseName);
 
 			return db;
 		}

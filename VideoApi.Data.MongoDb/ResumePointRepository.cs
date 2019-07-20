@@ -6,55 +6,62 @@ using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using VideoApi.Data.Entities;
+using VideoApi.Data.MongoDb.Mapping;
 
 namespace VideoApi.Data.MongoDb
 {
 	public class ResumePointRepository : IResumePointRepository
 	{
 		private readonly IMongoDatabase database;
-		private readonly IMongoCollection<Account> accountCollection;
+		private readonly MappingConfigurator mappingConfigurator;
 		private readonly IMongoCollection<ResumePoint> pointCollection;
 
-		public ResumePointRepository(IMongoDatabase database)
+		private readonly string accountIdColumnName;
+		private readonly string videoIdColumnName;
+		private readonly string timePointColumnName;
+
+		public ResumePointRepository(IMongoDatabase database, MappingConfigurator mappingConfigurator)
 		{
 			this.database = database;
-			this.accountCollection = this.database.GetCollection<Account>("accounts");
+			this.mappingConfigurator = mappingConfigurator;
 			this.pointCollection = this.database.GetCollection<ResumePoint>("resumePoints");
+
+			accountIdColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.AccountId));
+			videoIdColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.VideoId));
+			timePointColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.TimePoint));
 		}
 
 		public async Task<ResumePoint> Get(string accountId, string videoId)
 		{
-			FilterDefinition<Account> filter =
-				Builders<Account>.Filter.Eq("_id", new ObjectId(accountId)) &
-				Builders<Account>.Filter.ElemMatch(a => a.ResumePoints, rp => rp.VideoId == new BsonObjectId(new ObjectId(videoId)));
+			FilterDefinition<ResumePoint> filter =
+				Builders<ResumePoint>.Filter.Eq(accountIdColumnName, new ObjectId(accountId)) &
+				Builders<ResumePoint>.Filter.Eq(videoIdColumnName, new ObjectId(videoId));
 
-			var result = await this.accountCollection.Find(filter).SingleOrDefaultAsync();
+			var result = await this.pointCollection.Find(filter).SingleOrDefaultAsync();
 
-			return result.ResumePoints.SingleOrDefault();
+			return result;
 		}
 
 		public async Task<IReadOnlyList<ResumePoint>> GetAll(string accountId)
 		{
-			FilterDefinition<Account> accountFilter = new BsonDocument(
-				new BsonElement("_id", new BsonObjectId(new ObjectId(accountId))));
+			FilterDefinition<ResumePoint> filter = new BsonDocument(
+				new BsonElement(accountIdColumnName, new BsonObjectId(new ObjectId(accountId))));
 
-			Account account = await this.accountCollection.Find(accountFilter).FirstOrDefaultAsync();
-			if (account == null)
-				throw new ArgumentException($"Account {accountId} does not exist");
-
-			return account.ResumePoints;
+			IReadOnlyList<ResumePoint> list = await this.pointCollection.Find(filter).ToListAsync();
+			
+			return list;
 		}
 
 		public async Task InsertOrUpdate(string accountId, string videoId, double timePoint)
 		{
 			FilterDefinition<ResumePoint> filter = new BsonDocument()
 			{
-				{ "accountId", accountId },
-				{ "videoId", videoId }
+				{ accountIdColumnName, accountId },
+				{ videoIdColumnName, videoId }
 			};
 
 			UpdateDefinition<ResumePoint> update = 
-				new BsonDocument("$set", new BsonDocument("timePoint", timePoint));
+				new BsonDocument("$set", new BsonDocument(timePointColumnName, timePoint));
 
 			UpdateResult result = await this.pointCollection.UpdateOneAsync(
 				filter, update, new UpdateOptions { IsUpsert = true });
