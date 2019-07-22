@@ -25,12 +25,6 @@ namespace VideoApi.Data.MongoDb.Mapping
 				nameof(FirstLetterLowerCaseConvention),
 				pack,
 				t => t.FullName.StartsWith("VideoApi.Data"));
-			
-			BsonClassMap.RegisterClassMap<Account>(cm =>
-            {
-                cm.AutoMap();
-				cm.MapProperty(a => a.Id).SetSerializer(new ObjectIdToStringSerializer());				
-            });
 
 			BsonClassMap.RegisterClassMap<ResumePoint>(cm =>
 			{
