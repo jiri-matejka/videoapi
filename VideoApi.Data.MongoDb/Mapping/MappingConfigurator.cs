@@ -35,6 +35,7 @@ namespace VideoApi.Data.MongoDb.Mapping
 			BsonClassMap.RegisterClassMap<ResumePoint>(cm =>
 			{
 				cm.AutoMap();
+				cm.SetIgnoreExtraElements(true);
 				cm.MapProperty(r => r.VideoId).SetSerializer(new ObjectIdToStringSerializer());
 				cm.MapProperty(r => r.AccountId).SetSerializer(new ObjectIdToStringSerializer());
 			});

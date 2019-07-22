@@ -56,8 +56,8 @@ namespace VideoApi.Data.MongoDb
 		{
 			FilterDefinition<ResumePoint> filter = new BsonDocument()
 			{
-				{ accountIdColumnName, accountId },
-				{ videoIdColumnName, videoId }
+				{ accountIdColumnName, new BsonObjectId(new ObjectId(accountId)) },
+				{ videoIdColumnName, new BsonObjectId(new ObjectId(videoId)) }
 			};
 
 			UpdateDefinition<ResumePoint> update = 
