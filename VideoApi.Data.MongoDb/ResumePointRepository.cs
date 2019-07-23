@@ -7,6 +7,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using VideoApi.Data.Entities;
 using VideoApi.Data.MongoDb.Mapping;
+using VideoApi.Common;
+using VideoApi.Common.Exceptions;
 
 namespace VideoApi.Data.MongoDb
 {
@@ -33,6 +35,11 @@ namespace VideoApi.Data.MongoDb
 
 		public async Task<ResumePoint> Get(string accountId, string videoId)
 		{
+			if (accountId.IsNullOrEmpty() || !ObjectId.TryParse(accountId, out ObjectId _))
+				throw new ValidationException($"{nameof(accountId)} is not a correct ObjectId");
+			if (videoId.IsNullOrEmpty() || !ObjectId.TryParse(videoId, out ObjectId _))
+				throw new ValidationException($"{nameof(videoId)} is not a correct ObjectId");
+			
 			FilterDefinition<ResumePoint> filter =
 				Builders<ResumePoint>.Filter.Eq(accountIdColumnName, new ObjectId(accountId)) &
 				Builders<ResumePoint>.Filter.Eq(videoIdColumnName, new ObjectId(videoId));
@@ -44,6 +51,9 @@ namespace VideoApi.Data.MongoDb
 
 		public async Task<IReadOnlyList<ResumePoint>> GetAll(string accountId)
 		{
+			if (accountId.IsNullOrEmpty() || !ObjectId.TryParse(accountId, out ObjectId _))
+				throw new ValidationException($"{nameof(accountId)} is not a correct ObjectId");
+
 			FilterDefinition<ResumePoint> filter = new BsonDocument(
 				new BsonElement(accountIdColumnName, new BsonObjectId(new ObjectId(accountId))));
 
@@ -54,6 +64,13 @@ namespace VideoApi.Data.MongoDb
 
 		public async Task InsertOrUpdate(string accountId, string videoId, double timePoint)
 		{
+			if (accountId.IsNullOrEmpty() || !ObjectId.TryParse(accountId, out ObjectId _))
+				throw new ValidationException($"{nameof(accountId)} is not a correct ObjectId");
+			if (videoId.IsNullOrEmpty() || !ObjectId.TryParse(videoId, out ObjectId _))
+				throw new ValidationException($"{nameof(videoId)} is not a correct ObjectId");
+			if (timePoint < 0)
+				throw new ValidationException($"{nameof(timePoint)} must be non-negative number");
+
 			FilterDefinition<ResumePoint> filter = new BsonDocument()
 			{
 				{ accountIdColumnName, new BsonObjectId(new ObjectId(accountId)) },

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VideoApi.Common\VideoApi.Common.csproj" />
     <ProjectReference Include="..\VideoApi.Data\VideoApi.Data.csproj" />
   </ItemGroup>
 

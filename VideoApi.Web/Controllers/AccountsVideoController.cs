@@ -10,6 +10,7 @@ using VideoApi.Data.Entities;
 namespace VideoApi.Controllers
 {
     [Route("api/accounts/")]
+	[VideoApi.Web.ExceptionFilter]
     public class AccountsVideoController : Controller
     {
 		private readonly IResumePointRepository resumePointRepository;
@@ -45,17 +46,9 @@ namespace VideoApi.Controllers
 		public async Task<IStatusCodeActionResult> CreateOrUpdateResumePoint(string accountId, string videoId, [FromBody] CreateOrUpdateResumePointRequest request)
 		{
 			if (request == null)
-				return BadRequest();
-
-			try
-			{
-				await this.resumePointRepository.InsertOrUpdate(accountId, videoId, request.timePoint);
-			}
-			catch
-			{
-				// Normally I would log the exception to the log here
-				return StatusCode(500);
-			}
+				return BadRequest(new { error = "Empty request" });
+			
+			await this.resumePointRepository.InsertOrUpdate(accountId, videoId, request.timePoint);
 
 			return Ok();
 		}
