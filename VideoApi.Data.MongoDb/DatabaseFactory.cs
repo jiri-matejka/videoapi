@@ -10,11 +10,11 @@ namespace VideoApi.Data.MongoDb
 {
     internal class DatabaseFactory
     {
-		private readonly IConfiguration configuration;
+		private readonly IDatabaseConfigurationProvider configuration;
 		private readonly MappingConfigurator mappingConfigurator;
 		private readonly IMongoClient mongoClient;
 
-		public DatabaseFactory(IConfiguration configuration, MappingConfigurator mappingConfigurator)
+		public DatabaseFactory(IDatabaseConfigurationProvider configuration, MappingConfigurator mappingConfigurator)
 		{
 			this.configuration = configuration;
 			this.mappingConfigurator = mappingConfigurator;
@@ -26,18 +26,15 @@ namespace VideoApi.Data.MongoDb
 
 		private MongoClient CreateClient()
         {
-			var databaseSection = this.configuration.GetSection("Database");
-			string fullConnectionString = databaseSection["ConnectionString"];
+			string fullConnectionString = this.configuration.MongoConnectionString;
 			var mongoClient = new MongoClient(fullConnectionString);
 			
 			return mongoClient;
         }
 
-		public IMongoDatabase GetDefaultDatabase()
+		public IMongoDatabase GetDatabase()
 		{
-			var databaseSection = configuration.GetSection("Database");
-			string databaseName = databaseSection["DatabaseName"];
-
+			string databaseName = this.configuration.DatabaseName;
 			IMongoDatabase db = mongoClient.GetDatabase(databaseName);
 
 			return db;

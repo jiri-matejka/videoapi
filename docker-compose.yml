@@ -25,5 +25,12 @@ services:
     build:
       context: ./VideoApi.Web
       dockerfile: Dockerfile
+    environment:
+      VIDEOAPI_MONGO_USER: root
+      VIDEOAPI_MONGO_PWD: admin
+      VIDEOAPI_MONGO_HOST: mongo
+      VIDEOAPI_MONGO_PORT: 27017
+      VIDEOAPI_MONGO_AUTHDB: admin
+      VIDEOAPI_MONGO_DB: videoapi
     links:
       - mongo

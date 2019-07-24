@@ -11,12 +11,13 @@ namespace VideoApi.Data.MongoDb.Composition
 	{
 		public static void Register(IServiceCollection services)
 		{
+			services.AddSingleton<IDatabaseConfigurationProvider, EnvironmentVarsConfigurationProvider>();
 			services.AddSingleton<MappingConfigurator>();
 			services.AddSingleton<DatabaseFactory>();
 
 			services.AddSingleton(
 				(provider) =>
-					provider.GetService<DatabaseFactory>().GetDefaultDatabase()
+					provider.GetService<DatabaseFactory>().GetDatabase()
 				);
 
 			// Resume point repository does not have any per-scope state,
