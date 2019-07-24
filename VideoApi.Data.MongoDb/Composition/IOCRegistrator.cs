@@ -11,8 +11,6 @@ namespace VideoApi.Data.MongoDb.Composition
 	{
 		public static void Register(IServiceCollection services)
 		{
-			services.AddScoped<IResumePointRepository, ResumePointRepository>();
-			
 			services.AddSingleton<MappingConfigurator>();
 			services.AddSingleton<DatabaseFactory>();
 
@@ -20,6 +18,11 @@ namespace VideoApi.Data.MongoDb.Composition
 				(provider) =>
 					provider.GetService<DatabaseFactory>().GetDefaultDatabase()
 				);
+
+			// Resume point repository does not have any per-scope state,
+			// because IMongoCollection itself can be singleton
+			services.AddSingleton<IResumePointRepository, ResumePointRepository>();
+
 		}
 	}
 }
