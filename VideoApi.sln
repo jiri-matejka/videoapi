@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Web", "VideoApi.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Data", "VideoApi.Data\VideoApi.Data.csproj", "{49666905-0CBE-4A97-8C2F-339F2A58FE27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi.Common", "VideoApi.Common\VideoApi.Common.csproj", "{5F383732-E9A1-4283-A28C-C519B007E193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoApi.Common", "VideoApi.Common\VideoApi.Common.csproj", "{5F383732-E9A1-4283-A28C-C519B007E193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoApi.UnitTests", "VideoApi.UnitTests\VideoApi.UnitTests.csproj", "{2A8ED9B6-B0E3-44C0-9174-9524691F321D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5F383732-E9A1-4283-A28C-C519B007E193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F383732-E9A1-4283-A28C-C519B007E193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F383732-E9A1-4283-A28C-C519B007E193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8ED9B6-B0E3-44C0-9174-9524691F321D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8ED9B6-B0E3-44C0-9174-9524691F321D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8ED9B6-B0E3-44C0-9174-9524691F321D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8ED9B6-B0E3-44C0-9174-9524691F321D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

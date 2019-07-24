@@ -26,7 +26,7 @@ namespace VideoApi.Controllers
 		}
 
 		[HttpGet("{accountId}/resumepoints")]
-        public async Task<object> GetAllResumePoints(string accountId)
+        public async Task<IReadOnlyList<ResumePoint>> GetAllResumePoints(string accountId)
         {
 			IReadOnlyList<ResumePoint> resumePoints = await this.resumePointRepository.GetAll(accountId);
 
@@ -34,7 +34,7 @@ namespace VideoApi.Controllers
         }
 
 		[HttpGet("{accountId}/videos/{videoId}/resumepoint")]
-		public async Task<object> GetResumePointForVideo(string accountId, string videoId)
+		public async Task<ResumePoint> GetResumePointForVideo(string accountId, string videoId)
 		{
 			ResumePoint resumePoint = await this.resumePointRepository.Get(accountId, videoId);
 
