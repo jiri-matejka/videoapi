@@ -31,6 +31,16 @@ namespace VideoApi.Data.MongoDb
 			accountIdColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.AccountId));
 			videoIdColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.VideoId));
 			timePointColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.TimePoint));
+
+			// We create multikey index {accountId, videoId} for fast queries
+			// for accountId or accountId+videoId.
+			// Since this class is singleton in IoC, we can afford to create them 
+			// once at the first request, synchronously.
+			// If the index is already existing, Mongo does nothing.
+			pointCollection.Indexes.CreateOne(new CreateIndexModel<ResumePoint>(
+				new IndexKeysDefinitionBuilder<ResumePoint>()
+					.Ascending(x => x.AccountId)
+					.Ascending(x => x.VideoId)));
 		}
 
 		public async Task<ResumePoint> Get(string accountId, string videoId)
