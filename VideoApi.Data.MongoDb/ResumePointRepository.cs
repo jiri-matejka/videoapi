@@ -32,6 +32,11 @@ namespace VideoApi.Data.MongoDb
 			videoIdColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.VideoId));
 			timePointColumnName = this.mappingConfigurator.MapNameToMongo(nameof(ResumePoint.TimePoint));
 
+			EnsureIndexCreated();
+		}
+
+		private void EnsureIndexCreated()
+		{
 			// We create multikey index {accountId, videoId} for fast queries
 			// for accountId or accountId+videoId.
 			// Since this class is singleton in IoC, we can afford to create them 
