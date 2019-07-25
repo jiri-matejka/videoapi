@@ -2,10 +2,13 @@ version: '3.4'
 
 services:
   mongo-test:
-    image: mongo
+    build:
+      context: ./MongoDb-docker-container/
+      dockerfile: Dockerfile
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: admin
     ports:
       - 27001:27017
 
@@ -36,12 +39,6 @@ services:
   #  working_dir: /src
   #  environment:
   #    VIDEOAPI_INTEGRATION_TEST_WEB_ENDPOINT: http://localhost:8000/
-  #    VIDEOAPI_MONGO_USER: root
-  #    VIDEOAPI_MONGO_PWD: admin
-  #    VIDEOAPI_MONGO_HOST: mongo
-  #    VIDEOAPI_MONGO_PORT: 27001
-  #    VIDEOAPI_MONGO_AUTHDB: admin
-  #    VIDEOAPI_MONGO_DB: videoapi
   #  links:
   #    - mongo
   #    - videoapi.web
