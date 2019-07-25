@@ -48,7 +48,7 @@ dotnet test VideoApi.UnitTests/VideoApi.UnitTests.csproj
 
 ## Running integration tests
 Integration tests run in docker containers.
-Once the dotnet container videoapi.web:test has finished testing, the docker-compose stops all the other containers.
+Once the testing container (named "test") has finished testing (`dotnet test`) and terminates, the docker-compose stops all the other containers.
 ```
 dotnet publish VideoApi.Web/VideoApi.Web.csproj
 docker-compose -f docker-compose.yml -f docker-compose.test.yml -p videoapi-integrationtest up --build --abort-on-container-exit
