@@ -32,14 +32,14 @@ services:
       VIDEOAPI_MONGO_AUTHDB: admin
       VIDEOAPI_MONGO_DB: videoapi
 
-  #test:
-  #  image: mcr.microsoft.com/dotnet/core/sdk:2.2
-  #  volumes:
-  #    - .:/src
-  #  working_dir: /src
-  #  environment:
-  #    VIDEOAPI_INTEGRATION_TEST_WEB_ENDPOINT: http://localhost:8000/
-  #  links:
-  #    - mongo
-  #    - videoapi.web
-  #  command: /bin/bash -c "dotnet test ./VideoApi.IntegrationTests/VideoApi.IntegrationTests.csproj"
+  test:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    volumes:
+      - .:/src
+    working_dir: /src
+    environment:
+      VIDEOAPI_WEB_ENDPOINT: http://videoapi.web:80/
+    links:
+      - mongo-test
+      - videoapi.web:test
+    command: "dotnet test ./VideoApi.IntegrationTests/VideoApi.IntegrationTests.csproj"
