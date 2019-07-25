@@ -1,5 +1,7 @@
 # VideoApi assignment project
-Sample Web API for storing video resume points. .NET Core 2.2, Docker, MongoDb.
+Example Web API project for storing video resume points. .NET Core 2.2, Docker, MongoDb.
+
+For architecture decisions, look [here](architecture.md).
 
 ## Running
 To start the app:
@@ -10,7 +12,7 @@ docker-compose up
 Then the web API application is listening on port 23768.
 
 ## API
-The base path for API is: http://localhost:23768/api/
+The base path for API is: localhost:23768/api/
 ### GET accounts/[accountId]/videos/[videoId]/resumepoint
 Returns the resume point for account and video. The ID's must be in format of Mongo's object id.
 ### GET accounts/[accountId]/resumepoints
@@ -32,7 +34,7 @@ dotnet test VideoApi.UnitTests/VideoApi.UnitTests.csproj
 
 ## Running integration tests
 Integration tests run in docker containers.
-Once the dotnet container videoapi.web:test is finished testing, the docker-compose stops all the other containers.
+Once the dotnet container videoapi.web:test has finished testing, the docker-compose stops all the other containers.
 ```
 dotnet publish VideoApi.Web/VideoApi.Web.csproj
 docker-compose -f docker-compose.yml -f docker-compose.test.yml -p videoapi-integrationtest up --build --abort-on-container-exit
