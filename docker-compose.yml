@@ -7,4 +7,4 @@ services:
       context: ./VideoApi.Web
       dockerfile: Dockerfile
       args:
-        source: .
+        source: ./bin/Debug/netcoreapp2.2/publish
